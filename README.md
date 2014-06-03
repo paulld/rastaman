@@ -1,7 +1,8 @@
 rastaman
 ========
 
-Simple App using Rails + MongoDB. 
-Also uses the following languages:
+<p>Login process App using Rails + MongoDB. </p>
+
+<p>Also uses the following languages: </p>
 * CoffeeScript
 * Slim
