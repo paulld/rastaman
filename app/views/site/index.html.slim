@@ -1,0 +1,12 @@
+.row
+  .cold-md-6.col-md-offset-3
+    h1 Rastaman
+    dl.dl-horizontal
+      - @registrants.each do |registrant|
+        dt = registrant.email
+        dd = registrant.sign_up_code
+.row
+  .col-md-12
+    form
+      input#name-input> placeholder="Enter your name" style="border-width: 0 0 2px 0"
+      span#name-input-text style="color: hsla(0, 0%, 70%, 1)"
