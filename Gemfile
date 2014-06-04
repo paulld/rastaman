@@ -15,6 +15,7 @@ gem 'bcrypt'
 group :development, :test do
   gem 'rspec-rails', '2.13.1'
   gem 'capybara'
+  gem 'rack_session_access'
   gem 'launchy'
   gem 'fabrication'
   gem 'faker'

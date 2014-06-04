@@ -8,6 +8,7 @@ require 'capybara/rails'
 require 'capybara/rspec'
 require 'database_cleaner'
 require 'fabrication'
+require "rack_session_access/capybara"
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 

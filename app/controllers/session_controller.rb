@@ -16,6 +16,10 @@ class SessionController < ApplicationController
     end
   end
 
+  def destroy
+  
+  end
+
   protected
 
   def registrant_params

@@ -10,8 +10,12 @@ class RegistrationController < ApplicationController
     @user = User.new( user_params.merge(email: @registrant.email) )
 
     if @user.save
-      # redirect_to root_url
-      render json: @user
+      @registrant.destroy
+      # Log user in
+      session[:user_id] = @user.id
+
+      redirect_to root_url
+      # render json: @user
     else
       render :new
     end

@@ -11,4 +11,3 @@ end
 Fabricator(:user_with_blank_email, from: :user) do
   email { nil }
 end
-
