@@ -1,13 +1,16 @@
 class SessionController < ApplicationController
 
   def new
+    @registrant = Registrant.new
   end
 
   def create
     registrant = Registrant.new( registrant_params )
 
     if registrant.save
-      render json: registrant, status: :created
+      EmailValidator.complete_registration(registrant).deliver
+
+      render text: "We sent you an email", status: :created
     else
       render :new
     end
