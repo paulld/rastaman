@@ -1,11 +1,13 @@
 require 'spec_helper'
 
 describe "the registration process", :type => :feature do
-  let!(:password) { 'Secret123' }
+  # let!(:password) { 'Secret123' }
+  let!(:password) { Faker::Internet.password }
   subject { Fabricate(:registrant) }
 
   it "creates a new user, deletes the registrant, and redirects to the home page" do
     # puts "subject email:", subject.email
+    # puts "password:", password
     visit "/register/#{subject.sign_up_code}"
 
     within("#registration") do
@@ -17,11 +19,11 @@ describe "the registration process", :type => :feature do
 
     user = User.find_by(email: subject.email)
     # puts "user email:", user.email
-    # Registrant.find_by(email: subject.email)
+    registrant = Registrant.find_by(email: subject.email)
 
     expect(page.status_code).to eq(200)
     expect(page).to have_content "Welcome"
     expect(user).not_to be_nil
-    # expect(registrant).to be_nil
+    expect(registrant).to be_nil
   end
 end

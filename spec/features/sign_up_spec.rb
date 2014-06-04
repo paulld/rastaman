@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe "Sign up process", :type => :feature do
-  let!(:email) { 'user@example.com' }
+  # let!(:email) { 'user@example.com' }
+  let!(:email) { Faker::Internet.email }
 
   it "signs me up" do
     visit '/login'
