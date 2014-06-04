@@ -17,4 +17,5 @@ describe "Sign up process", :type => :feature do
     expect(page.status_code).to eq(201)
     expect(registrant.email).to eq(email)
   end
+
 end

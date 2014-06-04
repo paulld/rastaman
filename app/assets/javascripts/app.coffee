@@ -1,9 +1,11 @@
 $ ->
-  $('input').on 'keyup', (e) ->
-    input = $(@)
-    id = input.attr("id")
-    span = $("##{id}-text")
+  $('.form-key-up').on 'keyup', (e) ->
+    input       = $(@)
+    id          = input.attr("id")
+    placeholder = input.attr("placeholder")
+    span        = $("##{id}-text")
     if input.val().length > 0
-      span.html "&larr; #{input.attr('placeholder')}"
+      span.html "&larr; #{placeholder}"
+      # span.html "&larr; ok"
     else
       span.html ""

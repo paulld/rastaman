@@ -5,18 +5,7 @@
         legend Please sign up
         .form-group
           = f.label :email, class: 'sr-only'
-          = f.text_field :email, placeholder: 'Enter your email address', class: 'form-control'
+          = f.text_field :email, placeholder: 'Enter your email address', class: 'input-email form-key-up'
+          span#registrant_email-text style="color: hsla(0, 0%, 70%, 1)"
         .form-group
           = f.submit 'Sign up', class: 'btn btn-success'
-          
-/ submit or button ???
-
-
-    / form#login
-    /   fieldset
-    /     legend Please sign up
-    /     .form-group
-    /       label.sr-only for="email" Email
-    /       input#email.form-control placeholder="Enter your email address"
-    /     .form-group
-    /       button.btn.btn-success type="submit" value="Sign up"
