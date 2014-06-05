@@ -72,3 +72,36 @@ body > .container {
 .input-field-text {
   color: hsla(0, 0%, 70%, 1)
 }
+
+
+.login-form-selector {
+  margin: 20px 0 0;
+}
+.login-form-selector > ul > li {
+  width: 33.333333%;
+  text-align: center;
+}
+.login-form-selector > ul > li > a {
+  margin-right: 0;
+}
+.login-form-tab {
+  margin: 0;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-top-style: hidden;
+}
+
+.login-form-tab > form > fieldset > legend {
+  padding-left: 12px;
+  margin-bottom: 30px;
+  font-size: 20px;
+}
+.login-form-tab > form > fieldset > div > input.btn {
+  margin-left: 12px;
+  margin-top: 15px;
+  min-width: 80px;
+}
+.confirm-registration {
+  margin-top: 61px;
+  border-top-style: solid;
+}

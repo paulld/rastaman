@@ -1,31 +1,30 @@
 .row
   .col-sm-6.col-sm-offset-3
-    = form_for @registrant, url: login_url, html: { id: 'signup' } do |f|
-      fieldset
-        legend Please sign up
-        .form-group
-          = f.label :email, class: 'sr-only'
-          = f.text_field :email, placeholder: 'Enter your email address', class: 'input-field'
-          span#registrant_email-text.input-field-text
-        .form-group
-          = f.submit 'Sign up', class: 'btn btn-success'
+    .login-form-selector
+      / Add the login form for the USER (email and password) here
+      ul.nav.nav-tabs
+        li#login-form-login.active
+          a href="#" Log in
+        li#login-form-signup
+          a href="#" Sign up
+        li#login-form-reset
+          a href="#" Reset password
+    .login-form-tab
+      = form_for @user, url: login_url, html: { id: 'login' } do |f|
+        fieldset
+          legend Please log in
+          
+          #login-input-email.form-group
+            = f.label :email, class: 'sr-only'
+            = f.text_field :email, placeholder: 'Enter your email address', class: 'input-field'
+            span#user_email-text.input-field-text
+          
+          #login-input-password.form-group
+            = f.label :password, class: 'sr-only'
+            = f.password_field :password, placeholder: 'Enter your password', class: 'input-field'
+            span#user_password-text.input-field-text
+          
+          #login-input-button.form-group
+            = f.hidden_field :login_form_type, value: 'login'
+            = f.submit 'Log in', class: 'btn btn-success', id: 'submit-button'
 
-.row
-  .col-sm-6.col-sm-offset-3
-    / Add the login form for the USER (email and password) here
-    = form_for @user, url: login_url, html: { id: 'login' } do |f|
-      fieldset
-        legend Please Log in
-        .form-group
-          = f.label :password_confirmation, class: 'sr-only'
-          = f.text_field :password_confirmation, value: 'login', class: 'sr-only'
-        .form-group
-          = f.label :email, class: 'sr-only'
-          = f.text_field :email, placeholder: 'Enter your email address', class: 'input-field'
-          span#user_email-text.input-field-text
-        .form-group
-          = f.label :password, class: 'sr-only'
-          = f.password_field :password, placeholder: 'Enter your password', class: 'input-field'
-          span#user_password-text.input-field-text
-        .form-group
-          = f.submit 'Log in', class: 'btn btn-success'

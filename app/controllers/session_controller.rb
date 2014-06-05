@@ -1,22 +1,13 @@
 class SessionController < ApplicationController
 
   def new
-    @registrant = Registrant.new
     @user = User.new
   end
 
   def create
+    case params[:user][:login_form_type]
 
-    if params[:commit] == "Sign up"
-      @registrant = Registrant.new( registrant_params )
-        if @registrant.save
-          EmailValidator.complete_registration(@registrant).deliver
-          render text: "We sent you an email", status: :created
-        else
-          render :new
-        end
-
-    else
+    when "login"
       if @user = User.find_by(email: user_params[:email])
         if @user.authenticate( user_params[:password] )
           session[:user_id] = @user.id
@@ -27,6 +18,19 @@ class SessionController < ApplicationController
       else
         render text: "Email not found, please sign up"  #, status: :created
       end
+
+    when "signup"
+      @registrant = Registrant.new( user_params )
+        if @registrant.save
+          EmailValidator.complete_registration(@registrant).deliver
+          render text: "We sent you an email", status: :created
+        else
+          @user = User.new( user_params )
+          render :new
+        end
+
+    else
+      # send reset password email
 
     end
   end
@@ -39,11 +43,8 @@ class SessionController < ApplicationController
   protected
 
   def user_params
-    params.require(:user).permit( :email, :password )
+    # STRONG PARAMS (SINCE RAILS 4):
+    params.require(:user).permit( :email )
   end
 
-  def registrant_params
-    # STRONG PARAMS (SINCE RAILS 4):
-    params.require(:registrant).permit( :email )
-  end
 end
