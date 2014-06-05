@@ -5,7 +5,7 @@ class User
 
   before_save :encrypt_password
 
-  attr_accessor :password, :password_confirmation
+  attr_accessor :password, :password_confirmation, :log
 
   field :email
   field :salt
@@ -18,6 +18,9 @@ class User
     # encrypt the passed-in password with the user's salt
     # and compare it to the user's "fish"
     # return true if they match, false if they don't
+    
+    self.fish == BCrypt::Engine.hash_secret(password, self.salt)
+
   end
 
 
