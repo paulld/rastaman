@@ -5,7 +5,7 @@ class User
 
   before_save :encrypt_password
 
-  attr_accessor :password, :password_confirmation, :log
+  attr_accessor :password, :password_confirmation
 
   field :email
   field :salt
