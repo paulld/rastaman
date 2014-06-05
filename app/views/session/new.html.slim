@@ -1,5 +1,5 @@
 .row
-  .col-md-6.col-md-offset-3
+  .col-sm-6.col-sm-offset-3
     = form_for :registrant, url: login_url, html: { id: 'login' } do |f|
       fieldset
         legend Please sign up
@@ -9,3 +9,7 @@
           span#registrant_email-text.input-field-text
         .form-group
           = f.submit 'Sign up', class: 'btn btn-success'
+
+.row
+  .col-sm-6.col-sm-offset-3
+    / Add the login form for the USER (email and password) here

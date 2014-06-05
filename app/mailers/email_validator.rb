@@ -6,7 +6,7 @@ class EmailValidator < ActionMailer::Base
     @registrant = registrant
     @url = "http://localhost:3000/register/#{@registrant.sign_up_code}"
 
-    mail to: @registrant.email,
+    mail to: registrant.email,
       subject: "Please complete your registration to Rastaman!"
 
   end
