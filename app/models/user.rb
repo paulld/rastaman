@@ -3,28 +3,28 @@ require 'bcrypt'
 class User
   include Mongoid::Document
 
-  before_save :encrypt_password
+  before_save :encrypt_password, :downcase_email
 
   attr_accessor :password, :password_confirmation
 
   field :email
   field :salt
   field :fish
-  # some fields here for resetting the password
+  field :password_reset_code
+  field :password_reset_code_expires_at, type: Time
 
-  validates :email, presence: true, format: { with: EMAIL_REGEX }
+  # validates :email, presence: true, format: { with: EMAIL_REGEX }
   # validates :password, confirmation: true
 
-  
   def authenticate(password)
     self.fish == BCrypt::Engine.hash_secret(password, self.salt)
   end
 
-  # def self.authenticate(email, password)
-  #   user = User.find_by( email: email )
+  def self.authenticate(email, password)
+    user = User.find_by( email: email )
 
-  #   user if user && user.authenticate(password)
-  # end
+    user if user && user.authenticate(password)
+  end
 
   protected
 
@@ -36,4 +36,11 @@ class User
   def downcase_email
     self.email.downcase!
   end
+
+  # def set_password_reset_code
+  #   self.password_reset_code = SecureRandom.urlsafe_base64
+  #   self.password_reset_code_expires_at = Time.now + TIME_UNTIL_EXPIRE
+  #   self.save
+  # end
+
 end

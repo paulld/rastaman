@@ -72,7 +72,9 @@ body > .container {
 .input-field-text {
   color: hsla(0, 0%, 70%, 1)
 }
-
+.form-group > .field_with_errors {
+  display: inline;
+}
 
 .login-form-selector {
   margin: 20px 0 0;

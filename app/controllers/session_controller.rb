@@ -8,31 +8,34 @@ class SessionController < ApplicationController
     case params[:user][:login_form_type]
 
     when "login"
-      if @user = User.find_by(email: user_params[:email])
-        if @user.authenticate( user_params[:password] )
-          session[:user_id] = @user.id
-          render text: "Well done!"
-        else
-          render text: "Wrong password"  #, status: :created
-        end
+      if @user = User.authenticate(params[:user][:email], params[:user][:password])
+        session[:user_id] = @user.id
+        redirect_to root_url
       else
-        render text: "Email not found, please sign up"  #, status: :created
+        @user = User.new( user_params )
+        render :new
       end
 
     when "signup"
       @registrant = Registrant.new( user_params )
-        if @registrant.save
-          EmailValidator.complete_registration(@registrant).deliver
-          render text: "We sent you an email", status: :created
-        else
-          @user = User.new( user_params )
-          render :new
-        end
+
+      if @registrant.save
+        EmailValidator.complete_registration(@registrant).deliver
+
+        render text: "We sent you an email", status: :created
+      else
+        @user = User.new( user_params )
+        render :new
+      end
 
     else
-      # send reset password email
-
+      render text: "Resetting the password!"
+      # Find user with params[:user][:email] email address
+      # if not found, send "not found!" message
+      # if found, send password reset email
+      # if @user = User.find
     end
+
   end
 
   def destroy
@@ -46,5 +49,4 @@ class SessionController < ApplicationController
     # STRONG PARAMS (SINCE RAILS 4):
     params.require(:user).permit( :email )
   end
-
 end
