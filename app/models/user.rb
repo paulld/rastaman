@@ -31,6 +31,15 @@ class User
     self.set_password_reset_code_and_expiration
   end
 
+  def self.find_by_reset_code(password_reset_code)
+    if user = User.find_by( :password_reset_code => password_reset_code )
+      user.password_reset_code_expires_at = Time.now + TIME_UNTIL_EXPIRE
+      user.save
+      user
+    end
+  end
+
+
   protected
 
   def encrypt_password
