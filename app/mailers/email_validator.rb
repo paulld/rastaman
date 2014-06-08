@@ -9,7 +9,7 @@ class EmailValidator < ActionMailer::Base
   end
 
   def password_reset(user)
-    @url = "http://localhost:3000/reset/#{user.reset_code}"
+    @url = "http://localhost:3000/reset/#{user.password_reset_code}"
     
     mail to: user.email,
       subject: "Please reset your password for Rastaman!"

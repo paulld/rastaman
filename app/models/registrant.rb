@@ -26,7 +26,7 @@ class Registrant
 
   protected
 
-  def set_sign_up_code_and_expiration
+  def self.set_sign_up_code_and_expiration
     self.sign_up_code = SecureRandom.urlsafe_base64
     self.sign_up_expires_at = Time.now + TIME_UNTIL_EXPIRE
   end

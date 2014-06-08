@@ -29,11 +29,14 @@ class SessionController < ApplicationController
       end
 
     else
-      render text: "Resetting the password!"
-      # Find user with params[:user][:email] email address
-      # if not found, send "not found!" message
-      # if found, send password reset email
-      # if @user = User.find
+      if @user = User.find_by( :email => params[:user][:email] )
+        @user.generate_password_reset_code
+
+        EmailValidator.password_reset(@user).deliver
+        render text: "We sent you an email to reset your password"
+      else
+        render text: "Email not found, please sign up!"
+      end
     end
 
   end
