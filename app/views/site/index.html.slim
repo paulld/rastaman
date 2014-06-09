@@ -1,14 +1,31 @@
 .row
-  .cold-sm-6.col-sm-offset-3
-    h1 Welcome to Rastaman
-    h2 = @message
-    h3 List of registrants:
-    dl.dl-horizontal
-      - @registrants.each do |registrant|
-        dt = registrant.email
-        dd = registrant.sign_up_code
-    h3 List of users:
-    dl.dl-horizontal
-      - @users.each do |user|
-        dt = user.email
-        dd xxx
+  .col-sm-8.col-sm-offset-2
+    .row
+      h1 Welcome to Rastaman
+      .alert.alert-success = @message
+      .col-sm-6
+        .panel.panel-default
+          .panel-heading List of Registrants:
+          table.table
+            thead
+              tr
+                th Email
+                th ID
+            - @registrants.each do |registrant|
+              tbody
+                tr
+                  td = registrant.email
+                  td = registrant.id
+      .col-sm-6
+        .panel.panel-default
+          .panel-heading List of Users
+          table.table
+            thead
+              tr
+                th Email
+                th ID
+            - @users.each do |user|
+              tbody
+                tr
+                  td = user.email
+                  td = user.id

@@ -107,3 +107,9 @@ body > .container {
   margin-top: 61px;
   border-top-style: solid;
 }
+
+.alert-success {
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+}
