@@ -34,10 +34,7 @@ class User
   def self.find_by_reset_code(password_reset_code)
     if user = User.find_by( :password_reset_code => password_reset_code )
     # TODO: ASK DIFF BETWEEN (:password_reset_code => password_reset_code() AND (password_reset_code: password_reset_code)
-    # TODO: CHECK EXPIRATION DATE
       if user.password_reset_code_expires_at > Time.now
-  #     #   false
-  #     # else
         user.password_reset_code_expires_at = Time.now + TIME_UNTIL_EXPIRE
         user.save
         user
@@ -54,7 +51,6 @@ class User
   def protected_update_password(password, password_confirmation)
     self.password = password
     self.password_confirmation = password_confirmation
-    # self.fish = BCrypt::Engine.hash_secret(password, self.salt)
     self.password_reset_code = ""
     self.password_reset_code_expires_at = ""
     self.save

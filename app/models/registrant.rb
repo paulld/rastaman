@@ -3,7 +3,7 @@ class Registrant
 
   TIME_UNTIL_EXPIRE = 2.hours
 
-  # before_create :check_for_previous_attempt
+  # TODO before_create :check_for_previous_attempt
   before_create :set_sign_up_code_and_expiration
   before_save :downcase_email
 
@@ -11,9 +11,7 @@ class Registrant
   field :sign_up_code
   field :sign_up_expires_at, type: Time
 
-  # validates :email, presence: true, format: { with: EMAIL_REGEX }
-  validates :email, presence: true
-  validates :email, format: { with: EMAIL_REGEX }
+  validates :email, presence: true, format: { with: EMAIL_REGEX }
 
   def self.find_by_code(sign_up_code)
     Registrant.where( :sign_up_expires_at.lt => Time.now ).destroy_all
