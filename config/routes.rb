@@ -13,7 +13,7 @@ Rastaman::Application.routes.draw do
   get     'register/:sign_up_code'      => 'registration#new',    as: :register
   post    'register/:sign_up_code'      => 'registration#create'
 
-  get     'reset/:password_reset_code'  => 'reset#new',           as: :reset
-  patch   'reset/:password_reset_code'  => 'reset#update'         # OR UPDATE ????
+  get     'reset/:password_reset_code'  => 'reset#edit',          as: :reset
+  patch   'reset/:password_reset_code'  => 'reset#update'
 
 end

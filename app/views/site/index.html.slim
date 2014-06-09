@@ -1,12 +1,13 @@
 .row
   .cold-sm-6.col-sm-offset-3
     h1 Welcome to Rastaman
-    h2 List of registrants:
+    h2 = @message
+    h3 List of registrants:
     dl.dl-horizontal
       - @registrants.each do |registrant|
         dt = registrant.email
         dd = registrant.sign_up_code
-    h2 List of users:
+    h3 List of users:
     dl.dl-horizontal
       - @users.each do |user|
         dt = user.email
