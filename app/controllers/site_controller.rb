@@ -4,9 +4,11 @@ class SiteController < ApplicationController
     @registrants = Registrant.all.entries
     @users = User.all.entries
     if session[:user_id]
-      @message = "You are logged in with the user_id: #{session[:user_id]}"
+      @messageLogin = "You are logged in with the user_id: #{session[:user_id]}"
+      @messageLogout = ""
     else
-      @message = "You are not logged in"
+      @messageLogin = ""
+      @messageLogout = "You are not logged in"
     end
   end
 end

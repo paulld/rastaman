@@ -113,3 +113,22 @@ body > .container {
   font-size: 18px;
   text-align: center;
 }
+
+.alert-message {
+  padding: 10px;
+  margin-bottom: 20px;
+  /*border: 1px solid #d6e9c6;*/
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+}
+.alert-message-login {
+  color: #3c763d;
+}
+.alert-message-logout {
+  color: Red;
+}
+.welcome {
+  text-align: center;
+}

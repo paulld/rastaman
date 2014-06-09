@@ -1,8 +1,10 @@
 .row
   .col-sm-8.col-sm-offset-2
     .row
-      h1 Welcome to Rastaman
-      .alert.alert-success = @message
+      h1.welcome Welcome to Rastaman
+      .alert-message
+        span.alert-message-login = @messageLogin
+        span.alert-message-logout = @messageLogout
       .col-sm-6
         .panel.panel-default
           .panel-heading List of Registrants:
