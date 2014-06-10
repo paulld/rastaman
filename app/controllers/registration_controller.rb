@@ -1,10 +1,14 @@
 class RegistrationController < ApplicationController
 
   def new
+    @registerRedMessage = ""
     if @registrant = Registrant.find_by_code(params[:sign_up_code])
       @user = User.new(email: @registrant.email)
     else
       render text: "Your registration is expired!"
+      # @user = User.new()
+      # @registerRedMessage = "Your registration is expired!"
+      # redirect_to login_url
     end
   end
 
@@ -17,6 +21,7 @@ class RegistrationController < ApplicationController
         session[:user_id] = @user.id
         redirect_to root_url
       else
+        @registerRedMessage = "please input valid passord"
         render :new
       end
     else
@@ -27,6 +32,7 @@ class RegistrationController < ApplicationController
   protected
 
   def user_params
+    # Strong params = white list = only fields that are allowed to be passed in the form
     params.require(:user).permit( :password, :password_confirmation )
   end
 end

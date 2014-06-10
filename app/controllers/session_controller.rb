@@ -8,11 +8,14 @@ class SessionController < ApplicationController
     case params[:user][:login_form_type]
 
     when "login"
+      @sessionRedMessage = ""
+      @sessionGreenMessage = ""
       if @user = User.authenticate(params[:user][:email], params[:user][:password])
         session[:user_id] = @user.id
         redirect_to root_url
       else
         @user = User.new( user_params )
+        @sessionRedMessage = "Email and Password don't match"
         render :new
       end
 
@@ -22,7 +25,10 @@ class SessionController < ApplicationController
       if @registrant.save
         EmailValidator.complete_registration(@registrant).deliver
 
-        render text: "We sent you an email", status: :created
+        # render text: "We sent you an email", status: :created
+        @sessionGreenMessage = "We sent you an email to confirm your registration"
+        @user = User.new( user_params )
+        render :new
       else
         @user = User.new( user_params )
         render :new
@@ -33,9 +39,13 @@ class SessionController < ApplicationController
         @user.generate_password_reset_code
 
         EmailValidator.password_reset(@user).deliver
-        render text: "We sent you an email to reset your password"
+        @sessionGreenMessage = "We sent you an email to reset your password"
+        @user = User.new( user_params )
+        render :new
       else
-        render text: "Email not found, please sign up!"
+        @sessionRedMessage = "Email not found, please sign up!"
+        @user = User.new( user_params )
+        render :new
       end
     end
 

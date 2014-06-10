@@ -4,12 +4,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   # def application
   #   # @users = User.all.entries
-  #   if session[:user_id]
-  #     @messageLogin = "You are logged in with the user_id: #{session[:user_id]}"
-  #     @messageLogout = ""
-  #   else
-  #     @messageLogin = ""
-  #     @messageLogout = "You are not logged in"
-  #   end
+  # if @session[:user_id]
+  #   @messageLoginApp = "logged in"
+    
+  # else
+  #   @messageLoginApp = "not logged in"
+  #   # @messageLogout = "You are not logged in"
+  # end
   # end
 end
