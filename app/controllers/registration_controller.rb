@@ -1,14 +1,11 @@
 class RegistrationController < ApplicationController
 
   def new
-    @registerRedMessage = ""
     if @registrant = Registrant.find_by_code(params[:sign_up_code])
       @user = User.new(email: @registrant.email)
     else
-      render text: "Your registration is expired!"
-      # @user = User.new()
-      # @registerRedMessage = "Your registration is expired!"
-      # redirect_to login_url
+      redirect_to "/login", flash: { warning: 'Your registration is expired. Please sign up.' }
+      # TODO: show sign up tab
     end
   end
 
@@ -19,14 +16,14 @@ class RegistrationController < ApplicationController
       if @user.save
         @registrant.destroy
         log_user_in(@user)
-        # TODO: ADD FLASH
-        redirect_to "/restricted-area"
+        redirect_to "/restricted-area", flash: { success: 'You have successfully logged in.' }
       else
-        @registerRedMessage = "please input valid passord"
+        flash.now[:warning] = 'Please input a valid password.'
         render :new
       end
     else
-      render "Your registration is expired!"
+      redirect_to "/login", flash: { warning: 'Your registration is expired. Please sign up.' }
+      # TODO: show sign up tab
     end
   end
 

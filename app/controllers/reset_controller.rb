@@ -4,7 +4,9 @@ class ResetController < ApplicationController
     if @user = User.find_by_reset_code(params[:password_reset_code])
       @user
     else
-      render text: "Your reset code is expired!"
+      @user = User.new()
+      redirect_to "/login", flash: { warning: 'Your password reset code has expired!' }
+      # TODO: show reset password tab
     end
   end
 
@@ -13,13 +15,16 @@ class ResetController < ApplicationController
       @user.update_password(params[:user][:password], params[:user][:password_confirmation])
       if @user.save
         log_user_in(@user)
-        # TODO: ADD FLASH
-        redirect_to "/restricted-area"
+        redirect_to "/restricted-area", flash: { success: 'You have successfully logged in.' }
       else
+        @user = User.find_by_reset_code(params[:password_reset_code])
+        flash.now[:warning] = 'Please input a valid password.'
         render :edit
       end
     else
-      render "Your reset code is expired!"
+      @user = User.new()
+      redirect_to "/login", flash: { warning: 'Your password reset code has expired!' }
+      # TODO: show reset password tab
     end
   end
 
