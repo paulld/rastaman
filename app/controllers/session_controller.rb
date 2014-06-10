@@ -11,7 +11,8 @@ class SessionController < ApplicationController
       @sessionRedMessage = ""
       @sessionGreenMessage = ""
       if @user = User.authenticate(params[:user][:email], params[:user][:password])
-        session[:user_id] = @user.id
+        log_user_in(@user)
+        # TODO: ADD FLASH
         redirect_to root_url
       else
         @user = User.new( user_params )
@@ -52,7 +53,8 @@ class SessionController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    log_user_out
+    # TODO: ADD FLASH
     redirect_to login_url
   end
 

@@ -12,7 +12,8 @@ class ResetController < ApplicationController
     if @user = User.find_by_reset_code(params[:password_reset_code])
       @user.update_password(params[:user][:password], params[:user][:password_confirmation])
       if @user.save
-        session[:user_id] = @user.id
+        log_user_in(@user)
+        # TODO: ADD FLASH
         redirect_to root_url
       else
         render :edit

@@ -13,12 +13,4 @@ class ApplicationController < ActionController::Base
     session[:user_id] = nil
   end
 
-  # if @session[:user_id]
-  #   @messageLoginApp = "logged in"
-    
-  # else
-  #   @messageLoginApp = "not logged in"
-  #   # @messageLogout = "You are not logged in"
-  # end
-
 end
