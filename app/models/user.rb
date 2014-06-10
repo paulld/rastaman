@@ -33,7 +33,7 @@ class User
 
   def self.find_by_reset_code(password_reset_code)
     if user = User.find_by( :password_reset_code => password_reset_code )
-    # TODO: ASK DIFF BETWEEN (:password_reset_code => password_reset_code() AND (password_reset_code: password_reset_code)
+    # TODO: diff between (:password_reset_code => password_reset_code) AND (password_reset_code: password_reset_code)  ??
       if user.password_reset_code_expires_at > Time.now
         user.password_reset_code_expires_at = Time.now + TIME_UNTIL_EXPIRE
         user.save

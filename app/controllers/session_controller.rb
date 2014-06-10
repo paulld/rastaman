@@ -25,7 +25,7 @@ class SessionController < ApplicationController
       if @registrant.save
         EmailValidator.complete_registration(@registrant).deliver
 
-        # render text: "We sent you an email", status: :created
+        # render text: "We sent you an email", status: :created                 # TODO: what does status: :created do ??
         @sessionGreenMessage = "We sent you an email to confirm your registration"
         @user = User.new( user_params )
         render :new
@@ -35,7 +35,7 @@ class SessionController < ApplicationController
       end
 
     else
-      if @user = User.find_by( :email => params[:user][:email] )
+      if @user = User.find_by( :email => params[:user][:email] )        # TODO: diff params[:user][:email] and user_params[:email] ??
         @user.generate_password_reset_code
 
         EmailValidator.password_reset(@user).deliver
