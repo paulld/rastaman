@@ -13,7 +13,7 @@ class SessionController < ApplicationController
       if @user = User.authenticate(params[:user][:email], params[:user][:password])
         log_user_in(@user)
         # TODO: ADD FLASH
-        redirect_to root_url
+        redirect_to "/restricted-area"
       else
         @user = User.new( user_params )
         @sessionRedMessage = "Email and Password don't match"

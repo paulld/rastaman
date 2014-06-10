@@ -1,4 +1,6 @@
 .row
-  .col-md-6.col-md-offset-3
+  .col-md-8.col-md-offset-2
     h1 Restricted area
-    p You need to be logged in to see this page!
+    p Congratulations, you are allowed to view this page because you successfully logged in with the email:
+    p #{current_user.email}
+    a href='/logout' Logout

@@ -20,7 +20,7 @@ class RegistrationController < ApplicationController
         @registrant.destroy
         log_user_in(@user)
         # TODO: ADD FLASH
-        redirect_to root_url
+        redirect_to "/restricted-area"
       else
         @registerRedMessage = "please input valid passord"
         render :new

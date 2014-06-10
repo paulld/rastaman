@@ -14,7 +14,7 @@ class ResetController < ApplicationController
       if @user.save
         log_user_in(@user)
         # TODO: ADD FLASH
-        redirect_to root_url
+        redirect_to "/restricted-area"
       else
         render :edit
       end
