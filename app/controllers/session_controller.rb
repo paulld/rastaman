@@ -24,13 +24,13 @@ class SessionController < ApplicationController
         EmailValidator.complete_registration(@registrant).deliver
         # render text: "We sent you an email", status: :created                 # TODO: what does status: :created do ??
         @user = User.new( user_params )
-        flash.now[:alert] = 'We sent you an email to confirm your registration. Please check your mail box.'
+        flash.now[:alert] = 'We sent you an email to confirm your registration. Please check your emails.'
         render :new
       else
         @user = User.new( user_params )
         flash.now[:warning] = 'Unvalid email address. Please try again.'
+        @showTab = "signup"
         render :new
-        # TODO: show sign up tab
       end
 
     else
@@ -43,8 +43,8 @@ class SessionController < ApplicationController
       else
         flash[:warning] = "Email not found, please sign up!"
         @user = User.new( user_params )
+        @showTab = "signup"
         render :new
-        # TODO: show sign up tab
       end
     end
 

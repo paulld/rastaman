@@ -3,7 +3,7 @@
 class User
   include Mongoid::Document
 
-  TIME_UNTIL_EXPIRE = 2.hours
+  TIME_UNTIL_EXPIRE = 24.hours
 
   before_save :encrypt_password, :downcase_email
 
