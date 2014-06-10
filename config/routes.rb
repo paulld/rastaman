@@ -1,12 +1,16 @@
 Rastaman::Application.routes.draw do
-  root    'site#index'
+
+  root                                     'site#index'
+  get     'about-us'                    => 'site#about'
+  get     'restricted-area'             => 'site#restricted'
+
 
   get     'login'                       => 'session#new'
   post    'login'                       => 'session#create'
   delete  'logout'                      => 'session#destroy'
   get     'logout'                      => 'session#destroy'      # TEMPORARY
 
-  get     'about'                       => 'about#index'
+  # get     'about'                       => 'about#index'
 
   get     'credits'                     => 'credits#index'
 

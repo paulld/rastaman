@@ -11,7 +11,12 @@ class SiteController < ApplicationController
       @messageLogin = ""
       @messageLogout = "You are not logged in"
     end
-    
+  end
+
+  def about
+  end
+
+  def restricted
   end
 
 end
