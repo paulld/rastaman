@@ -1,3 +1,5 @@
+= javascript_include_tag 'session'
+
 javascript:
   $(function() {
     console.log("#{get_login_tab}");
@@ -25,7 +27,6 @@ javascript:
 .row
   .col-sm-6.col-sm-offset-3
     .login-form-selector
-      / Add the login form for the USER (email and password) here
       ul.nav.nav-tabs
         li#login-form-login.active
           a href="#" Log in

@@ -25,6 +25,7 @@ class SessionController < ApplicationController
         EmailValidator.complete_registration(@registrant).deliver
         @user = User.new( user_params )
         flash.now[:success] = 'We sent you an email to confirm your registration. Please check your emails.'
+        set_login_tab("signup")
         render :new
       else
         @user = User.new( user_params )

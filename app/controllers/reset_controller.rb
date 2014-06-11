@@ -5,13 +5,8 @@ class ResetController < ApplicationController
       @user
     else
       @user = User.new()
-      # TODO: show reset password tab
-      # @show_login_tab = "reset"
       set_login_tab("reset")
-      # render "session/new"
       redirect_to "/login", flash: { error: 'Your password reset code has expired!' }
-      # redirect_to "/login"(:showTab => @showTab), flash: { error: 'Your password reset code has expired!' }
-      # logger.info @showTab
     end
   end
 
@@ -28,8 +23,6 @@ class ResetController < ApplicationController
       end
     else
       @user = User.new()
-      # TODO: show reset password tab
-      # @show_login_tab = "reset"
       set_login_tab("reset")
       redirect_to "/login", flash: { error: 'Your password reset code has expired!' }
     end
