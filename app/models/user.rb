@@ -1,4 +1,7 @@
-# require 'bcrypt'
+# require 'bcrypt'    # not necessary anymore?
+
+# TODO: Profile page + edit user incl. change password action
+
 
 class User
   include Mongoid::Document

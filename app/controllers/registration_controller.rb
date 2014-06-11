@@ -5,9 +5,8 @@ class RegistrationController < ApplicationController
     if @registrant = Registrant.find_by_code(params[:sign_up_code])
       @user = User.new(email: @registrant.email)
     else
-      # TODO: show sign up tab
-      @showTab = "signup"
-      redirect_to "/login", flash: { warning: 'Your registration is expired. Please sign up.' }
+      set_login_tab("signup")
+      redirect_to "/login", flash: { error: 'Your registration is expired. Please sign up.' }
     end
   end
 
@@ -18,22 +17,21 @@ class RegistrationController < ApplicationController
       if @user.save
         @registrant.destroy
         log_user_in(@user)
-        redirect_to "/restricted-area", flash: { success: 'You have successfully logged in.' }
+        redirect_to "/restricted-area", flash: { success: 'Your registration is complete! You are now logged in.' }
       else
-        flash.now[:warning] = 'Please input a valid password.'
+        flash.now[:error] = 'Please input a valid password.'
         render :new
       end
     else
-      # TODO: show sign up tab
-      @showTab = "signup"
-      redirect_to "/login", flash: { warning: 'Your registration is expired. Please sign up.' }
+      set_login_tab("signup")
+      redirect_to "/login", flash: { error: 'Your registration is expired. Please sign up.' }
     end
   end
 
   protected
 
   def user_params
-    # Strong params = white list = only fields that are allowed to be passed in the form
+    # INFO: Strong params = White List = only fields that are allowed to be passed in the form
     params.require(:user).permit( :password, :password_confirmation )
   end
 end

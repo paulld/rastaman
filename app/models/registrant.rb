@@ -1,9 +1,11 @@
+
+  # TODO: before_create :check_for_previous_attempt (or not?)
+  # TODO: check if User already exists with this email
+
 class Registrant
   include Mongoid::Document
 
   TIME_UNTIL_EXPIRE = 24.hours
-
-  # TODO before_create :check_for_previous_attempt (or not?) + check if User already exists with this email
 
   before_create :set_sign_up_code_and_expiration
   before_save :downcase_email

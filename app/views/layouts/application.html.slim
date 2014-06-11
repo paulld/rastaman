@@ -32,7 +32,7 @@ html
         javascript:
           $(function() {
             switch ("#{name}") {
-              case "warning":
+              case "error":
                 var notyTimeout = 6000;
                 var notyLayout = 'topCenter';
                 break;
@@ -41,7 +41,7 @@ html
                 var notyLayout = 'topCenter';
                 break;
               case "alert":
-                var notyTimeout = 120000;
+                var notyTimeout = 6000;
                 var notyLayout = 'topCenter';
                 break;
             };
