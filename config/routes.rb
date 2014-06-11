@@ -11,7 +11,11 @@ Rastaman::Application.routes.draw do
   get     'register/:sign_up_code'      => 'registration#new',    as: :register
   post    'register/:sign_up_code'      => 'registration#create'
 
-  get     'reset/:password_reset_code'  => 'reset#edit',          as: :reset
-  patch   'reset/:password_reset_code'  => 'reset#update'
+  get     'reset/:password_reset_code'  => 'password#edit',       as: :reset
+  patch   'reset/:password_reset_code'  => 'password#update'
+
+  get     'profile'                     => 'profile#index',       as: :profile
+  get     'profile/edit'                => 'profile#edit'
+  patch   'profile/edit'                => 'profile#update'
 
 end

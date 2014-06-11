@@ -1,2 +1,6 @@
-li
-  = link_to "Logout", logout_url, method: :delete
+ul.nav.navbar-nav.navbar-right
+  li
+    = link_to "Profile", profile_url
+  li
+    = link_to logout_url, method: :delete
+      span.glyphicon.glyphicon-log-out

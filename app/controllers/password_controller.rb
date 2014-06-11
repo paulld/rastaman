@@ -1,4 +1,4 @@
-class ResetController < ApplicationController
+class PasswordController < ApplicationController
 
   def edit
     if @user = User.find_by_reset_code(params[:password_reset_code])

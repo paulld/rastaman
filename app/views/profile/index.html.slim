@@ -1,0 +1,33 @@
+.row
+  .col-md-8.col-md-offset-2
+    h1 My Profile
+    .row.profile
+
+      .col-md-3
+        img.img-thumbnail alt="Profile Picture" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYIx9IQ_1RY0ml1TGZQ5u-cMv_JsylAWzmzG2nefKnYTC2YhLx" width="140px" height="140px"
+      .col-md-9
+        dl.dl-horizontal
+          dt First Name
+          dd
+            - if current_user.first_name?
+              = current_user.first_name
+            - else
+              span.undefined-field undefined
+          dt Last Name
+          dd
+            - if current_user.last_name?
+              = current_user.last_name
+            - else
+              span.undefined-field undefined
+          dt Email
+          dd
+            - if current_user.email?
+              = current_user.email
+            - else
+              span.undefined-field undefined
+    .row
+      .col-md-3
+        = link_to "Edit my profile", 'profile/edit', class: 'btn btn-primary'
+
+
+          

@@ -1,7 +1,6 @@
-# require 'bcrypt'    # not necessary anymore?
+# require 'bcrypt'    # INFO: not necessary anymore?
 
 # TODO: Profile page + edit user incl. change password action
-
 
 class User
   include Mongoid::Document
@@ -17,6 +16,10 @@ class User
   field :fish
   field :password_reset_code
   field :password_reset_code_expires_at, type: Time
+  field :first_name
+  field :last_name
+  field :user_name
+  field :gender
 
   validates :email, presence: true, format: { with: EMAIL_REGEX }
   validates :password, confirmation: true

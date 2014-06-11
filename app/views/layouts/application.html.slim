@@ -25,7 +25,7 @@ html
               a href='/about-us' About us
             li
               a href='/restricted-area' Restricted
-            = render partial: current_user ? 'layouts/logged_in_partial' : 'layouts/logged_out_partial'
+          = render partial: current_user ? 'layouts/logged_in_partial' : 'layouts/logged_out_partial'
 
     .container.main-content
       - flash.each do |name, msg|
