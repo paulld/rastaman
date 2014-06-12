@@ -3,8 +3,13 @@
     .row
       h1.welcome Welcome to Rastaman
       .alert-message
-        span.alert-message-login = @messageLogin
-        span.alert-message-logout = @messageLogout
+        - if current_user
+          span.alert-message-login
+            | You are logged in with the user_id:
+            = current_user.id
+        - else
+          span.alert-message-logout
+            | You are not logged in
       .col-sm-6
         .panel.panel-default
           .panel-heading List of Registrants:

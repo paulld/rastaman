@@ -17,7 +17,7 @@ class RegistrationController < ApplicationController
       if @user.save
         @registrant.destroy
         log_user_in(@user)
-        redirect_to "/restricted-area", flash: { success: 'Your registration is complete! You are now logged in.' }
+        redirect_to profile_url, flash: { success: 'Your registration is complete! You are now logged in.' }
       else
         flash.now[:error] = 'Please input a valid password.'
         render :new

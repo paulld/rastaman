@@ -1,0 +1,17 @@
+.row
+  .col-sm-6.col-sm-offset-3
+    .login-form-tab.confirm-registration
+      = form_for @user, url: profile_edit_password_url, html: { id: 'update-password' } do |f|
+        fieldset
+          legend Update your password
+          .form-group
+            = f.label :password, class: 'sr-only'
+            = f.password_field :password, placeholder: 'Please enter your password', class: 'input-field'
+            span#user_password-text.input-field-text
+          .form-group
+            = f.label :password_confirmation, class: 'sr-only'
+            = f.password_field :password_confirmation, placeholder: 'Please enter your password again', class: 'input-field'
+            span#user_password_confirmation-text.input-field-text
+          .form-group
+            = f.submit 'Update!', class: 'btn btn-success'
+            = link_to "Cancel", profile_url, class: 'btn btn-link cancel-button'
