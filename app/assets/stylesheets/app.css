@@ -156,3 +156,6 @@ body > .container {
   margin-top: 15px;
   min-width: 80px;
 }
+.edit-button {
+  margin-right: 15px;
+}

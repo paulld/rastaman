@@ -1,17 +1,21 @@
 .row
   .col-sm-6.col-sm-offset-3
     .login-form-tab.confirm-registration
-      = form_for @user, url: 'profile/edit', html: { id: 'registration' } do |f|
+      = form_for @user, url: profile_edit_path, html: { id: 'profile-edit' } do |f|
         fieldset
           legend Update your profile
           .form-group
-            = f.label :password, class: 'sr-only'
-            = f.password_field :password, placeholder: 'Please enter your password', class: 'input-field'
-            span#user_password-text.input-field-text
+            = f.label :first_name, class: 'sr-only'
+            = f.text_field :first_name, placeholder: 'First name', class: 'input-field'
+            span#user_first_name-text.input-field-text
           .form-group
-            = f.label :password_confirmation, class: 'sr-only'
-            = f.password_field :password_confirmation, placeholder: 'Please enter your password again', class: 'input-field'
-            span#user_password_confirmation-text.input-field-text
+            = f.label :last_name, class: 'sr-only'
+            = f.text_field :last_name, placeholder: 'Last name', class: 'input-field'
+            span#user_last_name-text.input-field-text
           .form-group
-            = f.submit 'Register!', class: 'btn btn-success'
+            = f.label :user_name, class: 'sr-only'
+            = f.text_field :user_name, placeholder: 'Choose a Username', class: 'input-field'
+            span#user_user_name-text.input-field-text
+          .form-group
+            = f.submit 'Save', class: 'btn btn-success'
             = link_to "Cancel", profile_url, class: 'btn btn-link cancel-button'

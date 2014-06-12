@@ -19,7 +19,6 @@ class User
   field :first_name
   field :last_name
   field :user_name
-  field :gender
 
   validates :email, presence: true, format: { with: EMAIL_REGEX }
   validates :password, confirmation: true
@@ -51,6 +50,15 @@ class User
   def update_password(password, password_confirmation)
     self.protected_update_password(password, password_confirmation)
   end
+
+  def update_profile(first_name, last_name, user_name)
+    self.first_name = first_name
+    self.last_name = last_name
+    self.user_name = user_name
+    self.save
+    self          # TODO: why needed ??
+  end
+
 
   protected
   

@@ -14,3 +14,4 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require jquery.noty.packaged
+//= require app
