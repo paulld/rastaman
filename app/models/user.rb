@@ -33,7 +33,9 @@ class User
   end
 
   def generate_password_reset_code
-    self.set_password_reset_code_and_expiration
+    self.password_reset_code = SecureRandom.urlsafe_base64
+    self.password_reset_code_expires_at = Time.now + TIME_UNTIL_EXPIRE
+    self.save
   end
 
   def self.find_by_reset_code(password_reset_code)
@@ -45,11 +47,30 @@ class User
         user
       end
     end
+
+    # if user = User.find_by( :password_reset_code => password_reset_code, :password_reset_code_expires_at > Time.now )
+    # # TODO: diff between (:password_reset_code => password_reset_code) AND (password_reset_code: password_reset_code)  ??  
+    #   user.password_reset_code_expires_at = Time.now + TIME_UNTIL_EXPIRE
+    #   user.save
+    #   user
+    # end
   end
 
   def update_password(password, password_confirmation)
-    self.protected_update_password(password, password_confirmation)
+    self.password = password
+    self.password_confirmation = password_confirmation
+    self.save
+    # self
   end
+
+  def clear_reset_code
+    self.unset(:password_reset_code)
+    self.unset(:password_reset_code_expires_at)
+    self.save
+  end
+
+  
+  protected
 
   def update_profile(first_name, last_name, user_name)
     self.first_name = first_name
@@ -59,18 +80,6 @@ class User
     self          # TODO: why needed ??
   end
 
-
-  protected
-  
-  def protected_update_password(password, password_confirmation)
-    self.password = password
-    self.password_confirmation = password_confirmation
-    self.password_reset_code = ""
-    self.password_reset_code_expires_at = ""
-    self.save
-    self
-  end
-
   def encrypt_password
     self.salt = BCrypt::Engine.generate_salt
     self.fish = BCrypt::Engine.hash_secret(password, self.salt)
@@ -78,12 +87,6 @@ class User
 
   def downcase_email
     self.email.downcase!
-  end
-
-  def set_password_reset_code_and_expiration
-    self.password_reset_code = SecureRandom.urlsafe_base64
-    self.password_reset_code_expires_at = Time.now + TIME_UNTIL_EXPIRE
-    self.save
   end
 
 end

@@ -29,7 +29,7 @@ class SessionController < ApplicationController
         render :new
       else
         @user = User.new( user_params )
-        flash.now[:error] = 'Unvalid email address. Please try again.'
+        flash.now[:error] = 'Invalid email address. Please try again.'
         set_login_tab("signup")
         render :new
       end
@@ -42,7 +42,7 @@ class SessionController < ApplicationController
         flash.now[:success] = 'We sent you an email to reset your password.'
         render :new
       else
-        flash[:error] = "Unvalid email address. Please try again."
+        flash[:error] = "Invalid email address. Please try again."
         @user = User.new( user_params )
         set_login_tab("reset")
         render :new

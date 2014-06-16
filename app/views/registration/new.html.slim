@@ -1,7 +1,7 @@
 .row
   .col-sm-6.col-sm-offset-3
     .login-form-tab.confirm-registration
-      = form_for @user, url: register_url(@registrant.sign_up_code), html: { id: 'registration' } do |f|
+      = form_for @user, url: register_url(@registrant.registration_code), html: { id: 'registration' } do |f|
         fieldset
           legend Please complete your registration for #{@registrant.email}
           .form-group

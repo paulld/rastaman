@@ -7,19 +7,19 @@ class Registrant
 
   TIME_UNTIL_EXPIRE = 24.hours
 
-  before_create :set_sign_up_code_and_expiration
+  before_create :set_registration_code_and_expiration
   before_save :downcase_email
 
   field :email
-  field :sign_up_code
-  field :sign_up_expires_at, type: Time
+  field :registration_code
+  field :registration_expires_at, type: Time
 
   validates :email, presence: true, format: { with: EMAIL_REGEX }
 
-  def self.find_by_code(sign_up_code)
-    Registrant.where( :sign_up_expires_at.lt => Time.now ).destroy_all
-    if registrant = Registrant.find_by( :sign_up_code => sign_up_code )
-      registrant.sign_up_expires_at = Time.now + TIME_UNTIL_EXPIRE
+  def self.find_by_code(registration_code)
+    Registrant.where( :registration_expires_at.lt => Time.now ).destroy_all
+    if registrant = Registrant.find_by( :registration_code => registration_code )
+      registrant.registration_expires_at = Time.now + TIME_UNTIL_EXPIRE
       registrant.save
       registrant
     end
@@ -27,9 +27,9 @@ class Registrant
 
   protected
 
-  def set_sign_up_code_and_expiration
-    self.sign_up_code = SecureRandom.urlsafe_base64
-    self.sign_up_expires_at = Time.now + TIME_UNTIL_EXPIRE
+  def set_registration_code_and_expiration
+    self.registration_code = SecureRandom.urlsafe_base64
+    self.registration_expires_at = Time.now + TIME_UNTIL_EXPIRE
   end
 
   def downcase_email

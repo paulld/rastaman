@@ -2,7 +2,7 @@ class EmailValidator < ActionMailer::Base
   default from: 'admin@rastaman.com'
 
   def complete_registration(registrant)
-    @url = "http://localhost:3000/register/#{registrant.sign_up_code}"
+    @url = "http://localhost:3000/register/#{registrant.registration_code}"
     @email = registrant.email
     mail to: @email,
       subject: "Please complete your registration to Rastaman!"

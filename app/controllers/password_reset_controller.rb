@@ -1,8 +1,8 @@
-class PasswordController < ApplicationController
+class PasswordResetController < ApplicationController
 
   before_action :is_authenticated?, only: [ :edit_change, :update_change ]
 
-  def edit_reset
+  def edit
     if @user = User.find_by_reset_code(params[:password_reset_code])
       @user
     else
@@ -12,38 +12,22 @@ class PasswordController < ApplicationController
     end
   end
 
-  def update_reset
+  def update
     if @user = User.find_by_reset_code(params[:password_reset_code])
-      @user.update_password(params[:user][:password], params[:user][:password_confirmation])
-      if @user.save
+      if @user.update_password(params[:user][:password], params[:user][:password_confirmation])
+        @user.clear_reset_code
         log_user_in(@user)
         redirect_to profile_url, flash: { success: 'Your password has been updated. You are now logged in.' }
       else
         @user = User.find_by_reset_code(params[:password_reset_code])
         flash.now[:error] = 'Please input a valid password.'
-        render :edit_reset
+        render :edit
       end
     else
       @user = User.new()
       set_login_tab("reset")
       redirect_to "/login", flash: { error: 'Your password reset code has expired!' }
     end
-  end
-
-  def edit_change
-    @user = current_user
-  end
-
-  def update_change
-    @user = current_user
-    @user.update_password(params[:user][:password], params[:user][:password_confirmation])
-    if @user.save
-        redirect_to profile_url, flash: { success: 'Your password has been updated' }
-      else
-        @user = current_user
-        flash.now[:error] = 'Please input a valid password.'
-        render :edit_change
-      end
   end
 
 

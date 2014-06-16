@@ -2,7 +2,7 @@ class RegistrationController < ApplicationController
 
   def new
     # TODO: reset showTab to "" after any action ?????? cf. other Controllers too
-    if @registrant = Registrant.find_by_code(params[:sign_up_code])
+    if @registrant = Registrant.find_by_code(params[:registration_code])
       @user = User.new(email: @registrant.email)
     else
       set_login_tab("signup")
@@ -11,7 +11,7 @@ class RegistrationController < ApplicationController
   end
 
   def create
-    if @registrant = Registrant.find_by_code(params[:sign_up_code])
+    if @registrant = Registrant.find_by_code(params[:registration_code])
       @user = User.new( user_params.merge(email: @registrant.email) )
 
       if @user.save
