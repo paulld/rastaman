@@ -24,30 +24,30 @@ javascript:
     };
   });
 .row
-  .col-sm-6.col-sm-offset-3
+  .col-lg-6.col-lg-offset-3.col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1.col-xs-12
     .login-form-selector
       ul.nav.nav-tabs
         li#login-form-login.active
-          a href="#" Log in
+          a.log-button href="#" Log in
         li#login-form-signup
-          a href="#" Sign up
+          a.log-button href="#" Sign up
         li#login-form-reset
-          a href="#" Reset password
+          a.log-button href="#" Reset password
     .login-form-tab
       = form_for @user, url: login_url, html: { id: 'login' } do |f|
         fieldset
           legend Please log in
-          
-          #login-input-email.form-group
-            = f.label :email, class: 'sr-only'
-            = f.text_field :email, placeholder: 'Enter your email address', class: 'input-field'
-            span#user_email-text.input-field-text
-          
-          #login-input-password.form-group
-            = f.label :password, class: 'sr-only'
-            = f.password_field :password, placeholder: 'Enter your password', class: 'input-field'
-            span#user_password-text.input-field-text
-          
-          #login-input-button.form-group
-            = f.hidden_field :login_form_type, value: 'login'
-            = f.submit 'Log in', class: 'btn btn-success', id: 'submit-button'
+          .row.col-xs-12
+            #login-input-email.form-group
+              = f.label :email, class: 'sr-only'
+              = f.text_field :email, placeholder: 'Enter your email address', class: 'input-field'
+            
+          .row.col-xs-12
+            #login-input-password.form-group
+              = f.label :password, class: 'sr-only'
+              = f.password_field :password, placeholder: 'Enter your password', class: 'input-field'
+            
+          .row.col-xs-12
+            #login-input-button.form-group
+              = f.hidden_field :login_form_type, value: 'login'
+              = f.submit 'Log in', class: 'btn btn-success', id: 'submit-button'

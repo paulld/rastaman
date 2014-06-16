@@ -1,5 +1,5 @@
 .row
-  .col-sm-6.col-sm-offset-3
+  .col-lg-6.col-lg-offset-3.col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1.col-xs-12
     .login-form-tab.confirm-registration
       = form_for @user, url: profile_edit_path, html: { id: 'profile-edit' } do |f|
         fieldset
@@ -7,15 +7,15 @@
           .form-group
             = f.label :first_name, class: 'sr-only'
             = f.text_field :first_name, placeholder: 'First name', class: 'input-field'
-            span#user_first_name-text.input-field-text
+            
           .form-group
             = f.label :last_name, class: 'sr-only'
             = f.text_field :last_name, placeholder: 'Last name', class: 'input-field'
-            span#user_last_name-text.input-field-text
+            
           .form-group
             = f.label :user_name, class: 'sr-only'
             = f.text_field :user_name, placeholder: 'Choose a Username', class: 'input-field'
-            span#user_user_name-text.input-field-text
+            
           .form-group
             = f.submit 'Save', class: 'btn btn-success'
             = link_to "Cancel", profile_url, class: 'btn btn-link cancel-button'
