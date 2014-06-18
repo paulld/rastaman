@@ -16,7 +16,7 @@ class User
   field :salt
   field :fish
   field :password_reset_code
-  field :password_reset_code_expires_at, type: Time
+  field :password_reset_expires_at, type: Time
   field :first_name
   field :last_name
   field :user_name
@@ -35,51 +35,45 @@ class User
 
   def generate_password_reset_code
     self.password_reset_code = SecureRandom.urlsafe_base64
-    self.password_reset_code_expires_at = Time.now + TIME_UNTIL_EXPIRE
+    self.password_reset_expires_at = Time.now + TIME_UNTIL_EXPIRE
     self.save
   end
 
   def self.find_by_reset_code(password_reset_code)
+    User.where( :password_reset_expires_at.lt => Time.now ).each do |user|
+      user.clear_reset_code
+    end
     if user = User.find_by( :password_reset_code => password_reset_code )
     # TODO: diff between (:password_reset_code => password_reset_code) AND (password_reset_code: password_reset_code)  ??
-      if user.password_reset_code_expires_at > Time.now
-        user.password_reset_code_expires_at = Time.now + TIME_UNTIL_EXPIRE
-        user.save
-        user
-      end
+      user.password_reset_expires_at = Time.now + TIME_UNTIL_EXPIRE
+      user.save
+      user
     end
-
-    # if user = User.find_by( :password_reset_code => password_reset_code, :password_reset_code_expires_at > Time.now )
-    # # TODO: diff between (:password_reset_code => password_reset_code) AND (password_reset_code: password_reset_code)  ??  
-    #   user.password_reset_code_expires_at = Time.now + TIME_UNTIL_EXPIRE
-    #   user.save
-    #   user
-    # end
   end
 
   def update_password(password, password_confirmation)
     self.password = password
     self.password_confirmation = password_confirmation
     self.save
-    # self
+    self
   end
 
   def clear_reset_code
     self.unset(:password_reset_code)
-    self.unset(:password_reset_code_expires_at)
+    self.unset(:password_reset_expires_at)
     self.save
   end
-
-  
-  protected
 
   def update_profile(first_name, last_name, user_name)
     self.first_name = first_name
     self.last_name = last_name
     self.user_name = user_name
     self.save
-    self          # TODO: why needed ??
+    self
   end
+
+  
+  protected
 
   def encrypt_password
     self.salt = BCrypt::Engine.generate_salt

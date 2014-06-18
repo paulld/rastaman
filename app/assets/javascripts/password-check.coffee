@@ -11,11 +11,12 @@ $ ->
   glyphiconRemove = ->
     $('#password-match').removeClass('glyphicon-ok password-match-ok glyphicon-remove password-match-no')
   
-  resetProgressBar = (idx) ->
+  setProgressBar = (idx, result) ->
     idx.removeClass('progress-bar-success')
     idx.removeClass('progress-bar-warning')
     idx.removeClass('progress-bar-info')
     idx.removeClass('progress-bar-danger')
+    idx.addClass('progress-bar-' + result)
     
   checkPasswordStrength = ->
     if zxcvbn?
@@ -28,20 +29,18 @@ $ ->
       
       $('#password-crack-time').html timeToCrack
       progressBar.css('width', strength + '%')
+      progressBar.attr('aria-valuenow', strength)
+      $('#password-strength').html "Password Strengh: #{strength}%"
 
       switch score
         when 2
-          resetProgressBar(progressBar)
-          progressBar.addClass('progress-bar-success')
+          setProgressBar(progressBar, 'success')
         when 3
-          resetProgressBar(progressBar)
-          progressBar.addClass('progress-bar-warning')
+          setProgressBar(progressBar, 'warning')
         when 4
-          resetProgressBar(progressBar)
-          progressBar.addClass('progress-bar-danger')
+          setProgressBar(progressBar, 'danger')
         else
-          resetProgressBar(progressBar)
-          progressBar.addClass('progress-bar-info')
+          setProgressBar(progressBar, 'info')
 
       if score >= MINIMUM_SCORE then true else false
 

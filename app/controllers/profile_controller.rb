@@ -1,3 +1,6 @@
+# TODO: add image to profile
+# TODO: change email process (keep user_id)
+
 class ProfileController < ApplicationController
 
   before_action :is_authenticated?
